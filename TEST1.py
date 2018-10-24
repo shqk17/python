@@ -27,7 +27,7 @@ def getContent(url, headers):
     return content
 
 url = "http://171.221.172.13:8888/lottery/accept/projectList"
-# 这里面的my_headers中的内容由于是个人主机的信息，所以我就用句号省略了一些，在使用时可以将自己主机的
+
 my_headers = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"]
 html = getContent(url, my_headers)
 soupHtml = BeautifulSoup(html,"lxml")
