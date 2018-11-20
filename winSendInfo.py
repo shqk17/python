@@ -1,3 +1,5 @@
+import win32api
+
 from xlrd import open_workbook
 from xlutils.copy import copy
 import copy
@@ -45,7 +47,7 @@ def main():
     entryTime.grid(row=3, column=1, columnspan=3)
     # 第五行
     button = Button(root, text="确定",
-                    command=lambda: send_qq(entryObejct.get(), entryMsg.get(), entryNum.get(), entryTime.get()))
+                    command=lambda: send(entryObejct.get(), entryMsg.get(), pathObejct, entryNum.get(), entryTime.get()))
     button.grid(row=4, column=2)
     root.mainloop()
 
@@ -66,23 +68,29 @@ def setText(aString):
     w.CloseClipboard()
 
 
-def send_qq(to_who, msg, num, diftime):
-    """发送qq消息
-    to_who：qq消息接收人
-    msg：需要发送的消息
-    """
-    # 获取qq窗口句柄
-    qq = win32gui.FindWindow(None, to_who)
+def ctrlV():
+    win32api.keybd_event(17, 0, 0, 0)  # ctrl键位码是17
+    win32api.keybd_event(86, 0, 0, 0)  # v键位码是86
+    win32api.keybd_event(86, 0, win32con.KEYEVENTF_KEYUP, 0)  # 释放按键
+    win32api.keybd_event(17, 0, win32con.KEYEVENTF_KEYUP, 0)
+
+
+def altS():
+    win32api.keybd_event(18, 0, 0, 0)  # Alt
+    win32api.keybd_event(83, 0, 0, 0)  # s
+    win32api.keybd_event(83, 0, win32con.KEYEVENTF_KEYUP, 0)  # 释放按键
+    win32api.keybd_event(18, 0, win32con.KEYEVENTF_KEYUP, 0)
+
+def send(to_who, msg, pathMsg, num, diftime):
+    pathMsg.set("请输入名称")
+
+    tid = win32gui.FindWindow(None, to_who)
+    # left, top, right, bottom = win32gui.GetWindowRect(tid)
     i = 0;
     while i < int(num):
         setText(msg)
-        # 将消息写到剪贴板
-        # 投递剪贴板消息到QQ窗体
-        win32gui.SendMessage(qq, 258, 22, 2080193)
-        win32gui.SendMessage(qq, 770, 0, 0)
-        # 模拟按下回车键
-        win32gui.PostMessage(qq, win32con.WM_KEYDOWN, win32con.VK_RETURN, 0)  # 向窗口发送 回车键
-        win32gui.PostMessage(qq, win32con.WM_KEYUP, win32con.VK_RETURN, 0)
+        ctrlV()
+        altS()
         i = i + 1
         time.sleep(float(diftime))
 
