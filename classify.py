@@ -17,7 +17,7 @@ for file in files_list:
         continue
 
     # 取得当前文件名称的格式，（切分文件名，取最后的列表元素）
-    file_type = str(datetime.date.today())+"_"+file.split('.')[-1]
+    file_type = file.split('.')[-1]
     # 如果没有某个格式的文件夹，则创建这个文件夹
     if not os.path.exists(file_type):
         os.mkdir(file_type)
