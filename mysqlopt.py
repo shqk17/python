@@ -10,11 +10,9 @@ db = pymysql.connect(host='192.168.0.5',
                      )
 cursor = db.cursor()
 
-sql = "SELECT a.id from tss_member_return_premium_history a " \
-      "lEFT JOIN sys_admin_user b on a.adminUserId = b.id " \
-      "LEFT JOIN sys_school c on c.id =b.schoolId " \
-      "where c.schoolName is null"
-
+sql = "delete from %s "
+set=['sys_school_admin_bind','tss_allocation','tss_app_activity','tss_app_appointment_manage','tss_app_follow_up_record',
+     'tss_app_member_attend_class_record','']
 cursor.execute(sql)
 i = 1
 for row in cursor.fetchall():
