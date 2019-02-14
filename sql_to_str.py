@@ -171,12 +171,12 @@ def get0perator(o):
     return getText + dict_oper.get(o[1]) + (o[0][0].upper()+o[0][1:])+"(){ return %s; }" %o[0]
 def set0perator(o):
     dict_oper = {
-        'varchar': 'public String set',
-        'int': 'public Integer set',
-        'double': 'public Double set',
-        'datetime': 'public Date set',
-        'date': 'public Date set',
-        'bit': 'public Boolean set'
+        'varchar': 'public void set',
+        'int': 'public void set',
+        'double': 'public void set',
+        'datetime': 'public void set',
+        'date': 'public void set',
+        'bit': 'public void set'
     }
     oper = {
         'varchar': 'String',
