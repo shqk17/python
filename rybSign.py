@@ -19,7 +19,7 @@ def sign(userName, password, loginId,pathUrl, result):
         return False
     signStr = res.hexdigest()
     print(signStr)
-    url=pathUrl+'/api/login/appLogin.do?'+'&loginId=' + loginId + '&password=' + password \
+    url=pathUrl+'?&loginId=' + loginId + '&password=' + password \
         + '&userName=' + userName+'&sign='+signStr+'&timestamp='+timestamp+'&randomStr=' + 'fysdg234dfg'
     result.insert(1.0, url)
 def main():
