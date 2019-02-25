@@ -13,7 +13,7 @@ def main():
     # display the quit button
     text = edit(root)  #
     l = tk.Label(root, text='sql工具', fg='white', bg='black', width=100)
-    l.grid(row=4,column=0,columnspan=5,sticky=tk.E + tk.W + tk.S + tk.N)
+    l.grid(row=4, column=0, columnspan=5, sticky=tk.E + tk.W + tk.S + tk.N)
     button(root, text)
     # quitbutton(root)
     root.mainloop()  # 这里进入顶层窗口的循环
@@ -24,22 +24,21 @@ def main():
 
 def edit(root):
     edit = tk.Text(root, fg='black', bg='#DCDCDC', font='微软雅黑', width=10, height=15, )
-    edit.grid(row=0,column=0,columnspan=5 , sticky=tk.N + tk.E + tk.W)
+    edit.grid(row=0, column=0, columnspan=5, sticky=tk.N + tk.E + tk.W)
 
     # button 传递参数使用lambda函数
     # delete all the value in the text editor
     clear1 = tk.Button(root, text='Clear', width=80, bg='#F5DEB3', font='微软雅黑',
                        command=lambda: edit.delete(1.0, tk.END))
 
-
     result = tk.Text(root, fg='black', bg='#DCDCDC', font='微软雅黑', width=30, height=10, )
-    result.grid(row=2,column=0,columnspan=5 ,sticky=tk.N + tk.E + tk.W)
+    result.grid(row=2, column=0, columnspan=5, sticky=tk.N + tk.E + tk.W)
 
     # button 传递参数使用lambda函数
     # delete all the value in the text editor
     clear2 = tk.Button(root, text='Clear', width=80, bg='#F5DEB3', font='微软雅黑',
                        command=lambda: ClearAll(result, edit))
-    clear2.grid(row=3,column=0,columnspan=5)
+    clear2.grid(row=3, column=0, columnspan=5)
     text = [edit, result]
     return text
 
@@ -47,12 +46,12 @@ def edit(root):
 # 这里定义窗口中所有的按钮控件，并且显示出来，并且设置好每个按钮的响应函数，使用button的command选项来控制
 def button(root, text):
     clu = 0
-    transformation = tk.Button(root, text='格式化sql', fg='black',width=20, command=lambda: Transformation(text))
-    getSQLField = tk.Button(root, text='获取sql字段', fg='black',width=20, command=lambda: GetSQLField(text))
-    sqlFieldToBean = tk.Button(root, text='sql字段转javaBean',width=20, fg='black', command=lambda: SqlFieldToBean(text))
-    md5do = tk.Button(root, text='-Md5  Creator-', fg='black',width=20, command=lambda: md5create(text))
-    auther = tk.Button(root, text='冯书浩',width=20)
-    but = [transformation, md5do, getSQLField, sqlFieldToBean, auther]
+    transformation = tk.Button(root, text='格式化sql', fg='black', width=20, command=lambda: Transformation(text))
+    getSQLField = tk.Button(root, text='获取sql字段', fg='black', width=20, command=lambda: GetSQLField(text))
+    sqlFieldToBean = tk.Button(root, text='sql字段转javaBean', width=20, fg='black', command=lambda: SqlFieldToBean(text))
+    md5do = tk.Button(root, text='-Md5  Creator-', fg='black', width=20, command=lambda: md5create(text))
+    mapperToSql = tk.Button(root, text='Mapper转SQL', fg='black', command=lambda: MapperToSql(text))
+    but = [transformation, md5do, getSQLField, sqlFieldToBean, mapperToSql]
     for i in but:
         i.grid(row=1, column=clu, sticky=tk.N + tk.E + tk.W)
         clu += 1
@@ -205,6 +204,65 @@ def set0perator(o):
         o[1]) + " %(value1)s ){ this.%(value2)s = %(value3)s ; }" % value
 
 
+def switch(s):
+    new_string = re.sub('[A-Z]+', lambda x: "_" + str(x.group(0)).lower(), s)
+    if len(new_string) > 0:
+        return new_string[1:]
+
+
+def getType(v):
+    oper = {
+        'INTEGER': 'int',
+        'VARCHAR': 'VARCHAR (32) ',
+        'TIMESTAMP': 'datetime',
+        'BIT': 'bit (1) ',
+        'CHAR': 'char (32) '
+    }
+    return oper.get(v)
+
+
+def mapperToSql(text):
+    lines = str(text).split("\n")
+    aaa = []
+    typePattern = re.compile(r'(\w+\.){2}\w+')
+    jdbcTypePattern = re.compile(r'INTEGER|VARCHAR|TIMESTAMP|BIT|CHAR')
+    tableName = ""
+    Map = {}
+
+    for l in lines:
+        if re.findall(typePattern, l):
+            tableNameBig = str(re.findall('type="(.*)"', l)[0]).split('.')[-1]
+            tableName = switch(tableNameBig)
+        elif re.findall(jdbcTypePattern, l):
+            column = str(re.findall(r'"(.*?)"', l)[0])
+            jdbcType = str(re.findall(r'"(.*?)"', l)[1])
+            # 检查jdbcType是否正确
+            if getType(jdbcType) is not None:
+                Map[column] = jdbcType
+            else:
+                jdbcType = str(re.findall(r'"(.*?)"', l)[2])
+                Map[column] = jdbcType
+    sqlStr = 'CREATE TABLE `%s` (\n' % (tableName)
+    for k, v in Map.items():
+        sqlPart = "`%s` %s NOT NULL,\n" % (k, getType(v))
+        sqlStr = sqlStr + sqlPart
+    sqlStr = sqlStr + "  PRIMARY KEY (`code`))  \n" \
+                      "ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+    return sqlStr
+
+
+def MapperToSql(text):
+    edit, result = text[0], text[1]
+    enc = edit.get(1.0, tk.END)
+    try:  # .encode('ascii')
+        res = mapperToSql(enc[0:-1])
+    except Exception as e:
+        print(e)
+        return False
+    result.insert(1.0, res)  # .decode('ascii')
+    return True
+
+
 # 这里定义md5生成函数
 def md5create(text):
     edit, result = text[0], text[1]
@@ -216,6 +274,7 @@ def md5create(text):
         return False
     result.insert(1.0, res.hexdigest())  # 将md5后的数据插入到输出edit控件中
     return True
+
 
 def ClearAll(result, edit):
     result.delete(1.0, tk.END)
