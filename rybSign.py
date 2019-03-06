@@ -1,9 +1,7 @@
 import tkinter as tk
 import time
-import datetime
 import hashlib
 from tkinter import *
-import pymd5
 
 
 def sign(userName, password, loginId,pathUrl, result):
