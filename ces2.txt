@@ -1,0 +1,27 @@
+{
+"user":"4",
+"url": "http://192.168.0.4:8080/tss/tssMemberAttendClassRecordController/tssMemberAttendClassRecordListGroupByClass.do",
+"host": "http://192.168.0.4:8080",
+"threadsNum": "20000",
+"thinkTime": "0.5",
+"data1": {"query": {"type":"1",
+"targetdataId":"402882f967ddc3e90167de35de0a027e",
+"containerId":"14B4B06B37494E8C9BC6E4449C4D777E",
+"pageSize": "15"},
+
+ "cookie": "JSESSIONID=82321E8FDF3FE90AE3D9596CB18F738A; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false; Hm_lvt_257921e48f280645ac7bf4874badc66a=1541489470,1541677560,1541683062,1542018397; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551161019,1551335856,1551669851,1551851284; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551856980",
+ "duanyan":"402882f967ddc3e90167de35de0a027e"
+ },
+"data2": {"query": {"type": "1","targetdataId":"ff8080816618c8e3016618d214bb0074","containerId":"2706019438A24A0A9282CDBB21BD8DEB","pageSize": "15"},
+ "cookie": "JSESSIONID=713934931B79ECC1E627782FBEBC858D; __guid=225840474.3677734997263655000.1540263517514.5168; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551851485; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false; monitor_count=12; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551856977",
+ "duanyan": "ff8080816618c8e3016618d214bb0074"
+ },
+"data3": {"query": {"type": "1","targetdataId":"ff8080816118455901611c4b843f0b01","containerId":"BF413260B0B14E5EBF144F1C4E9EAA8C","pageSize": "15"},
+ "cookie": "JSESSIONID=6915D2043A1E0316715555E66E875963; navbar-fixed-top=true; sidebar-fixed=true; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551851819; page-header-isShow=false; page-header-fixed=false; breadcrumbs-fixed=true; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551856995",
+ "duanyan": "ff8080816118455901611c4b843f0b01"
+ },
+"data4": {"query": {"type": "1","targetdataId":"ff80808162cc94db0162ccdf37df004a","containerId":"218FF7B0C6B2403EA9CC2615A9B4AEE1","pageSize": "15"},
+ "cookie": "JSESSIONID=7C4F4B53991B959C7AE04A845AED1FD1; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551852193; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551856990; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false",
+ "duanyan": "ff80808162cc94db0162ccdf37df004a"
+ }
+}

@@ -1,23 +1,19 @@
 {
-"user":"1",
-"url": "http://192.168.0.4:8080/tss/tssMemberPackageController/tssMemberPackageList.do",
-"host": "192.168.0.4:8081",
-"threadsNum": "10",
+"user":"3",
+"url": "http://192.168.0.4:8080/tss/tssMemberAttendClassRecordController/tssMemberAttendClassRecordListGroupByClass.do",
+"host": "http://192.168.0.4:8080",
+"threadsNum": "10000",
 "thinkTime": "1",
-"data1": {
-    "query": {
-        "type": "1",
-        "pageSize": "15"
-        },
-"cookie": "JSESSIONID=7C3924476D01F76AB658DF5FAEE7A9BF; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551681252,1551682176; SL_G_WPT_TO=zh; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551841384",
-"duanyan": "4028829d67a572f50167a5852cac00cf"
+"data1": {"query": {"type":1,"targetdataId":"2c9282866915015d01691da342311bc6","containerId":"325BBE6A8BBE4E75B7EB6F4C32243DB8","pageSize":15},
+ "cookie": "JSESSIONID=9D338897D8CD280966D7C9ABFB71D7DE; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551681252,1551682176,1551870922; SL_G_WPT_TO=zh; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551876767",
+ "duanyan": "2c9282866915015d01691da342311bc6"
  },
- "data1": {
-    "query": {
-        "type": "1",
-        "pageSize": "15"
-        },
-"cookie": "JSESSIONID=7C3924476D01F76AB658DF5FAEE7A9BF; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551681252,1551682176; SL_G_WPT_TO=zh; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551841384",
-"duanyan": "4028829d67a572f50167a5852cac00cf"
+"data2": {"query": {"type":1,"targetdataId":"2c9282866923e2880169431e7b862c2c","containerId":"0B382B1332434DBEAE33CAAD43A34E5C","pageSize":15},
+ "cookie": "JSESSIONID=B5602F68587E38925D5B481B3B8B4E0D; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false; SL_G_WPT_TO=zh; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551842004; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551876898",
+ "duanyan": "2c9282866923e2880169431e7b862c2c"
+ },
+"data3": {"query": {"type":1,"targetdataId":"2c928286680e306a01681262d32d509d","containerId":"3A009C7B025A47979863F74EA1F8E396","pageSize":15},
+ "cookie": "JSESSIONID=4BA085BA75F1816C46F97C84904BEFE3; __guid=225840474.3865276326851612700.1536302851176.0002; navbar-fixed-top=true; sidebar-fixed=true; breadcrumbs-fixed=true; page-header-fixed=false; page-header-isShow=false; Hm_lvt_257921e48f280645ac7bf4874badc66a=1542286889; Hm_lvt_25437122cff4baad62984b1f218a0b02=1551877655; monitor_count=5; Hm_lpvt_25437122cff4baad62984b1f218a0b02=1551878052",
+ "duanyan": "2c928286680e306a01681262d32d509d"
  }
 }

@@ -1,4 +1,4 @@
-import os, shutil ,datetime
+import os, shutil, datetime
 
 # shutil模块主要是用于拷贝文件
 
@@ -7,6 +7,7 @@ files_list = os.listdir()
 # 取得python脚本的名字
 # __file__是取得当前脚本路径,如果路径是“\anaconda3\python”这样的格式，则要使用“\\”做切分
 py_name = __file__.split('/')[-1]
+notdoclassify = ["py", "exe"]
 
 for file in files_list:
     # 如果是文件是当前执行的py脚本，则跳过
@@ -17,7 +18,9 @@ for file in files_list:
         continue
 
     # 取得当前文件名称的格式，（切分文件名，取最后的列表元素）
-    file_type = str(datetime.date.today())+"_"+file.split('.')[-1]
+    file_type = str(datetime.date.today()) + "_" + file.split('.')[-1]
+    if file_type in ",".join(notdoclassify):
+        continue
     # 如果没有某个格式的文件夹，则创建这个文件夹
     if not os.path.exists(file_type):
         os.mkdir(file_type)

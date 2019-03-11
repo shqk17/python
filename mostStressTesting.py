@@ -44,7 +44,7 @@ def loop(nloop, nsec, datas, oneuser):
         else:
             error.append("2")
             print("用户" + str(oneuser) + "---断言失败_" + str(datetime.datetime.now()) + "---")
-            flieLog = open("./11.txt", "a")
+            flieLog = open("./yaliceslog.txt", "a")
             flieLog.write("用户" + str(oneuser) + "-----\n" + r.text)
             flieLog.close()
     except Exception as e:

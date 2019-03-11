@@ -106,7 +106,7 @@ def SqlFieldToBean(text):
 def strToSql2(text):
     s = "".join(str(text).split("\n"))
     aaa = re.split(r'CREATE(.+?)\(', s, 2)
-    pattern = re.compile(r'`(.+?)((` varchar)|(` int)|(` date)|(` double)|(` datetime)|(` bit))')
+    pattern = re.compile(r'`(.+?)((` varchar)|(` int)|(` date)|(` double)|(` datetime)|(` bit)|(` time))')
     a = re.findall(pattern, aaa[2])
     field = []
     for i in a:
