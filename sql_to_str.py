@@ -14,6 +14,7 @@ def main():
     l = tk.Label(root, text='sql工具', fg='white', bg='black', width=100)
     l.grid(row=4, column=0, columnspan=5, sticky=tk.E + tk.W + tk.S + tk.N)
     button(root, text)
+    button2(root, text)
     # quitbutton(root)
     root.mainloop()  # 这里进入顶层窗口的循环
 
@@ -57,6 +58,17 @@ def button(root, text):
     return but
 
 
+def button2(root, text):
+    clu = 0
+    Topysql = tk.Button(root, text='格式化sql成python格式', fg='black', width=20, command=lambda: topysql(text))
+    IdFomart = tk.Button(root, text='id可查询格式化', fg='black', width=20, command=lambda: idFormat(text))
+    but = [Topysql, IdFomart]
+    for i in but:
+        i.grid(row=2, column=clu, sticky=tk.N + tk.E + tk.W)
+        clu += 1
+    return but
+
+
 # 格式化java代码复制的sql 便于美化
 def Transformation(text):
     edit, result = text[0], text[1]
@@ -74,6 +86,36 @@ def strToSql(text):
     s = "".join(str(text).split("\n")).replace("\\n", "").replace("\\t", "").replace("+", "").replace("\"", "").replace(
         "                 ", " ")
     return s
+
+
+def idFormat(text):
+    edit, result = text[0], text[1]
+    enc = edit.get(1.0, tk.END)
+    try:
+        txt = enc[0:-1]
+        s = ''
+        for t in txt.split('\n'):
+            s = s + "'" + t + "',\n"
+    except Exception as e:
+        print(e)
+        return False
+    result.insert(1.0, s)
+    return True
+
+
+def topysql(text):
+    edit, result = text[0], text[1]
+    enc = edit.get(1.0, tk.END)
+    try:
+        txt = enc[0:-1]
+        s = ''
+        for t in txt.split('\n'):
+            s = s + '"' + t + '"\\ \n'
+    except Exception as e:
+        print(e)
+        return False
+    result.insert(1.0, s)
+    return True
 
 
 # sql 提取字段转为 逗号拼接字符串

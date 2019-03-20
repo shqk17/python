@@ -4,55 +4,52 @@ import hashlib
 from tkinter import *
 
 
-def sign(userName, password, loginId,pathUrl, result):
-    str1 = 'loginId=' + loginId + '&password=' + password + '&userName=' + userName
+def sign(pathUrl, random, pathParam, result):
+    if len(pathParam) == 0:
+        return result.insert(1.0, "请输入需要加密的参数")
+    Param = str(pathParam).rstrip().split("&")
+    if len(Param) == 0:
+        return result.insert(1.0, "参数格式不正确")
+    Param.sort()
+    str1 = "&".join(Param)
     timestamp = str(int(time.time()))
-    str2 = 'timestamp=' + timestamp + '&' + str1 + '&randomStr=' + 'fysdg234dfg'
-    unSignStr = timestamp + str2.lower()[::-1] + 'fysdg234dfg'
-    print('unSignStr:'+unSignStr)
+    str2 = 'timestamp=' + timestamp + '&' + str1 + '&randomStr=' + random
+    unSignStr = timestamp + str2.lower()[::-1] + random
+    print('unSignStr:' + unSignStr)
     res = hashlib.md5()
     try:
-        res.update(unSignStr.encode('ascii'))
-    except:
+        res.update(unSignStr.encode())
+    except Exception as e:
+        print(e)
         return False
     signStr = res.hexdigest()
     print(signStr)
-    url=pathUrl+'?&loginId=' + loginId + '&password=' + password \
-        + '&userName=' + userName+'&sign='+signStr+'&timestamp='+timestamp+'&randomStr=' + 'fysdg234dfg'
-    result.insert(1.0, url)
+    url = pathUrl + '?' + str1 + '&sign=' + signStr + '&timestamp=' + timestamp + '&randomStr=' + random
+    resulturl = 'unSignStr:' + unSignStr + '\n' + '签名字符串：' + signStr + '\n链接地址：\n' + url
+    result.insert(1.0, resulturl)
+
+
 def main():
     root = tk.Tk()
     root.title('红黄蓝接口加密工具')
-    lbObejct = Label(root, text="请输入用户名:")
-    lbObejct.grid(row=0, column=0)
-    pathObejct = StringVar()
-    entryObejct = Entry(root, textvariable=pathObejct)
-    entryObejct.grid(row=0, column=1, columnspan=3)
-    # 第二行
-    lbMsg = Label(root, text="请输入密码:")
-    lbMsg.grid(row=1, column=0)
-    pathMsg = StringVar()
-    entryMsg = Entry(root, textvariable=pathMsg)
-    entryMsg.grid(row=1, column=1, columnspan=3)
-    # 第三行
-    lbNum = Label(root, text="请输入loginId:")
-    lbNum.grid(row=2, column=0)
-    pathNum = StringVar()
-    entryNum = Entry(root, textvariable=pathNum)
-    entryNum.grid(row=2, column=1, columnspan=3)
-    # 第四行
-    urlNum = Label(root, text="请输入域名地址:")
-    urlNum.grid(row=3, column=0)
+    urlNum = Label(root, text="请输入域名地址:", justify=LEFT).pack()
     pathUrl = StringVar()
-    entryUrl = Entry(root, textvariable=pathUrl)
-    entryUrl.grid(row=3, column=1, columnspan=3)
-    # 第五行
-    result = Text(root, fg='black', bg='#DCDCDC', font='微软雅黑', width=30, height=10, )
-    result.grid(row=4, column=0, columnspan=3)
+    entryUrl = Entry(root, textvariable=pathUrl).pack(fill=X)
+
+    lbMsg = Label(root, text="请输入随机字符串:").pack(fill=X)
+
+    pathMsg = StringVar()
+    entryMsg = Entry(root, textvariable=pathMsg).pack(fill=X)
+
+    lsParam = Label(root, text="请输入参数串:").pack(fill=X)
+    paramMsg = StringVar()
+    entryParam = Entry(root, textvariable=paramMsg).pack(fill=X)
+
+    resulttxt = Label(root, text="结果集:").pack(fill=X)
+    result = Text(root, fg='black', bg='#DCDCDC', font='微软雅黑', width=50, height=10, ).pack(fill=X)
     # 第六行
-    button = Button(root, text="确定",
-                    command=lambda: sign(entryObejct.get(), entryMsg.get(), entryNum.get(), pathUrl.get(),result))
-    button.grid(row=5, column=2)
+    button = Button(root, text="确定", command=lambda: sign(pathUrl.get(), pathMsg.get(), paramMsg.get(), result)).pack(
+        fill=X)
     root.mainloop()
 
 
