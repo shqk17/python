@@ -11,11 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(709, 651)
+        MainWindow.resize(709, 707)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(10, 10, 681, 581))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(10, 10, 681, 641))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -52,6 +52,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.gridLayout.addWidget(self.pushButton_2, 12, 1, 1, 2)
         self.textEdit_4 = QtWidgets.QTextEdit(self.gridLayoutWidget)
+        self.textEdit_4.setMaximumSize(QtCore.QSize(16777215, 12100))
         self.textEdit_4.setObjectName("textEdit_4")
         self.gridLayout.addWidget(self.textEdit_4, 13, 1, 1, 2)
         self.label_6 = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -101,17 +102,23 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "请输入参数串："))
         self.label_4.setText(_translate("MainWindow", "加密结果："))
         self.label_2.setText(_translate("MainWindow", "请输入随机数："))
+        self.lineEdit_2.setPlaceholderText(_translate("MainWindow", "(可不填，默认会随机生成)"))
         self.pushButton.setText(_translate("MainWindow", "加密"))
         self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">k=v&amp;k1=v1</p></body></html>"))
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.textEdit.setPlaceholderText(_translate("MainWindow", "k=v&k1=v1（用&拼接 参数名=参数值）"))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow", "http://"))
         self.label.setText(_translate("MainWindow", "请输入链接地址："))
         self.pushButton_2.setText(_translate("MainWindow", "发送请求"))
         self.label_6.setText(_translate("MainWindow", "请求结果："))
         self.label_7.setText(_translate("MainWindow", "添加body："))
         self.radioButton.setText(_translate("MainWindow", "POST"))
+        self.textEdit_5.setPlaceholderText(_translate("MainWindow", "可不填"))
+        self.textEdit_2.setPlaceholderText(_translate("MainWindow", "会生成 加密前参数串‘unSignStr’,以及加密后的 ‘签名字符串’，可进行对比验证"))
         self.radioButton_2.setText(_translate("MainWindow", "GET"))
         self.label_8.setText(_translate("MainWindow", "请输入时间戳："))
+        self.timestemp_text.setPlaceholderText(_translate("MainWindow", "(可不填，默认会生成当前时间戳)"))
 

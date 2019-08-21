@@ -1,8 +1,8 @@
 import threading
 import datetime
 import requests
-import time
 from time import sleep, ctime
+import re
 
 lock = threading.Lock()
 loops = [4, 2]
@@ -10,11 +10,11 @@ times = []
 error = []
 
 
-def loop(nloop, nsec, cookie, duanyan,url):
-    lock.acquire()
+def loop(nloop, nsec, cookie, urlstr):
+    # lock.acquire()
     print('start loop ' + str(nloop) + ' at : ' + str(ctime()))
-    url = "http://192.168.0.4:8080/tss/"+url
-    headers = {'Host': '192.168.0.4:8081',
+    url = "http://www.zshom.com/webskill/newestNote?page=1&limit=8&dynamicTypeCur=0" + urlstr
+    headers = {'Host': 'www.zshom.com',
                'Connection': 'keep-alive',
                'Cache-Control': 'max-age=0',
                'Upgrade-Insecure-Requests': '1',
@@ -30,39 +30,27 @@ def loop(nloop, nsec, cookie, duanyan,url):
     }
     # 设置cookies：
     headers['Cookie'] = cookie
-    try:
-        r = requests.post(url=url, headers=headers, data=data)
-        ResponseTime = float(r.elapsed.microseconds) / 1000
-        times.append(ResponseTime)
-        if r.status_code != 200:
+    for j in range(10000):
+        try:
+            # r = requests.post(url=url, headers=headers, data=data)
+            r = requests.get(url=url, headers=headers)
+            ResponseTime = float(r.elapsed.microseconds) / 1000
+            times.append(ResponseTime)
+            if r.status_code != 200:
+                error.append("0")
+            else:
+                print("查询列表成功:" + str(r.text))
+        except Exception as e:
             error.append("0")
-        # 定义断言ID
-        ss = duanyan
-        htmlss = str(r.text).replace("\r", "").strip()
-        if ss in htmlss:
-            print("---断言成功_" + str(datetime.datetime.now()) + "---")
-            error.append("1")
-        else:
-            error.append("2")
-            print("---断言失败_" + str(datetime.datetime.now()) + "---")
-            flieLog = open("./11.txt", "a")
-            flieLog.write(r.text)
-            flieLog.close()
-    except Exception as e:
-        error.append("0")
-        print("*****发生异常*****")
-        flieLog = open("./error.txt", "a")
-        flieLog.write(str(e))
-        flieLog.close()
-    lock.release()
-    sleep(nsec)
-    print('loop ', nloop, ' done at : ', ctime())
+            print("*****发生异常*****")
+        sleep(nsec)
+        print('loop ', nloop, ' done at : ', ctime(), '次数：', j + 1)
 
 
 def main():
     print('starting at : ', ctime())
+    urlstr = input("请输入请求接口：")
     cookie = input("请输入cookie：")
-    duanyan = input("请输入断言字符串：")
     threadsNum = input("请输入执行线程数：")
     thinkTime = input("请输入睡眠时间：")
     starttime = datetime.datetime.now()
@@ -74,7 +62,7 @@ def main():
     nloops = range(nub)
 
     for i in nloops:
-        t = threading.Thread(target=loop, args=(i, ThinkTime, cookie, duanyan))
+        t = threading.Thread(target=loop, args=(i, ThinkTime, cookie, urlstr))
         threads.append(t)
 
     for i in nloops:
@@ -94,9 +82,6 @@ def main():
     totaltime = float(hour) * 60 * 60 + float(minute) * 60 + float(second)
     print("Concurrent processing %s" % nub)
     print("use total time %s s" % (totaltime - float(nub * ThinkTime)))
-    print("异常统计 request %s" % error.count("0"))
-    print("断言失败统计 request %s" % error.count("2"))
-    print("断言成功统计 request %s" % error.count("1"))
     print('all DONE at : ', ctime())
 
 

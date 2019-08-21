@@ -1,8 +1,7 @@
-import sys, time, hashlib
-from PyQt5 import QtCore, QtGui, uic, QtWidgets
-import requests
-import json, re
-from sql_format_form import Ui_MainWindow
+import sys
+from PyQt5 import QtWidgets
+import re
+from work.sql_format_form import Ui_MainWindow
 
 
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
