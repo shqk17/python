@@ -3,7 +3,7 @@ from time import sleep
 
 from 补数据专区 import bsUtil
 
-sql = "SELECT id from tss_member_attend_class_record  a where a.id not in (  " \
+sql = "SELECT a.id from tss_member_attend_class_record  a where a.id not in (  " \
       "SELECT attendClassId from tss_member_check_attendance )"
 sql2 = "delete from tss_member_attend_class_record where id ='%s'"
 while True:

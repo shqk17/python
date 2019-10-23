@@ -47,12 +47,12 @@ def get_zj(j):
 if __name__ == '__main__':
     # 所要爬取的小说主页，每次使用时，修改该网址即可，同时保证本地保存根路径存在即可
     # 本地保存爬取的文本根路径
-    save_path = '/data/python_work/novelDate'
+    save_path = 'E:\pythonDown'
     # 笔趣阁网站根路径
-    # target = "https://www.biqubao.com/book/27688/"
-    # index_path = 'https://www.biqubao.com'
-    target = "https://www.yangguiweihuo.com/4/4471/"
-    index_path = 'https://www.yangguiweihuo.com/'
+    target = "https://www.biqubao.com/book/25397/"
+    index_path = 'https://www.biqubao.com/'
+    # target = "https://www.yangguiweihuo.com/4/4471/"
+    # index_path = 'https://www.yangguiweihuo.com/'
     req = requests.get(url=target)
     # 查看request默认的编码，发现与网站response不符，改为网站使用的gdk
     print(req.encoding)
