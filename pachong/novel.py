@@ -5,7 +5,6 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import threading
-import queue
 
 
 def get_zj(j):
@@ -49,10 +48,10 @@ if __name__ == '__main__':
     # 本地保存爬取的文本根路径
     save_path = 'E:\pythonDown'
     # 笔趣阁网站根路径
-    target = "https://www.biqubao.com/book/25397/"
-    index_path = 'https://www.biqubao.com/'
-    # target = "https://www.yangguiweihuo.com/4/4471/"
-    # index_path = 'https://www.yangguiweihuo.com/'
+    # target = "https://www.biqubao.com/book/25397/"
+    # index_path = 'https://www.biqubao.com/'
+    target = "https://www.23wx.so/20_20732/"
+    index_path = 'https://www.23wx.so/20_20732/'
     req = requests.get(url=target)
     # 查看request默认的编码，发现与网站response不符，改为网站使用的gdk
     print(req.encoding)
@@ -61,7 +60,7 @@ if __name__ == '__main__':
     soup = BeautifulSoup(req.text, "html.parser")
     list_tag = soup.div(id="list")
     if len(list_tag) < 1:
-        list_tag = soup.findAll(name="div", attrs={"class" :"listmain"})
+        list_tag = soup.findAll(name="div", attrs={"id": "list"})
     print('list_tag:', list_tag)
     # 获取小说名称
     story_title = list_tag[0].dl.dt.string
@@ -79,7 +78,10 @@ if __name__ == '__main__':
         # 章节名称
         chapter_name = dd_tag.string
         # 章节网址
-        chapter_url = index_path + dd_tag.a.get('href')
+        try:
+            chapter_url = index_path + dd_tag.a.get('href')
+        except:
+            continue
         # novelList[str(dd_tag.a.get('href')).split("/")[-1].split(".")[0]] = chapter_name + ';' + chapter_url
         print(str(dd_tag.a.get('href')).split("/")[-1].split(".")[0])
         print(chapter_name + ';' + chapter_url)

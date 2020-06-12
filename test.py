@@ -18,6 +18,12 @@ print(begin_date)
 tm = datetime.datetime.strptime("2019-09-08 12:00:00","%Y-%m-%d %H:%M:%S")
 time_offset = tm+datetime.timedelta(seconds=1)
 print(time_offset.strftime("%Y-%m-%d %H:%M:%S"))
+
+nowTime = datetime.datetime.now()
+
+str_p = '2020-01-30'
+dateTime_p = datetime.datetime.strptime(str_p,'%Y-%m-%d')
+print((dateTime_p - nowTime).days)
 # c = b'\x00'
 # string = (ord(b'\x00'))
 # print(string)

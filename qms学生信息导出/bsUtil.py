@@ -14,7 +14,7 @@ def getDBLink(type):
                              passwd='Aa12345678',
                              db='tss',
                              charset='utf8'
-                             # , cursorclass=pymysql.cursors.DictCursor
+                             , cursorclass=pymysql.cursors.DictCursor
                              )
 
     if type == 2:
@@ -24,7 +24,7 @@ def getDBLink(type):
                              passwd='rybu0OsWO2qL7Ef',
                              db='tss',
                              charset='utf8'
-                             # , cursorclass=pymysql.cursors.DictCursor
+                             , cursorclass=pymysql.cursors.DictCursor
                              )
     if type == 3:
         db = pymysql.connect(host='192.168.0.5',
@@ -33,7 +33,7 @@ def getDBLink(type):
                              passwd='asdfg_qwert@',
                              db='tss',
                              charset='utf8'
-                             # , cursorclass=pymysql.cursors.DictCursor
+                             , cursorclass=pymysql.cursors.DictCursor
                              )
 
     return db.cursor(), db

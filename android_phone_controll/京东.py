@@ -62,19 +62,19 @@ class MyTests():
 
     def operateAction(self, flag):
         if flag == 1:
-            for i in range(1, 20):
+            for i in range(0, 25):
                 self.guangdian(930, 993.6)
                 time.sleep(1)
-            for i in range(1, 3):
+            for i in range(0, 3):
                 self.guangdian(930, 1204)
                 time.sleep(1)
-            for i in range(1, 25):
+            for i in range(0, 25):
                 self.guangdian(930, 1504)
                 time.sleep(1)
-            for i in range(1, 4):
+            for i in range(0, 4):
                 self.guangdian(930, 1744)
                 time.sleep(1)
-            for i in range(1, 4):
+            for i in range(0, 4):
                 self.guangdian(930, 2044)
                 time.sleep(1)
 

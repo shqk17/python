@@ -1,5 +1,4 @@
 import time
-from random import Random
 
 from appium import webdriver
 
@@ -51,57 +50,114 @@ class MyTests():
     def tap(self, x, y):
         self.driver.tap([(x, y)])
 
-    def guangdian(self, x, y):
+    def guangdian(self, x, y, t):
         # 点击逛店活动
         self.tap(x, y)
         time.sleep(3)
         # 上滑
         self.swipeUp(500, 0.55)  # 1080 宽
         print("上滑")
-        for j in range(1, 17):
+        for j in range(0, t):
             print("浏览中：" + str(j))
             time.sleep(1)
         # 左滑返回
         self.swipLeft(500, 0.55)
         print("左滑返回")
 
-    def operateAction(self, flag):
-        if flag == 1:
-            pass
-        elif flag == 2:
-            # 逛店活动
-            for i in range(0, 20):
-                self.guangdian(920, 1280)
-                time.sleep(1)
-        elif flag == 3:
-            for i in range(1, 20):
-                self.guangdian(920, 1435.2)
-                time.sleep(1)
-        elif flag == 4:
-            alist = [1280, 1435.2, 1622.2]
-            for i in range(1, 20):
-                ss = Random().randint(0, 2)
-                self.guangdian(888, alist[ss])
-                time.sleep(1)
-        elif flag == 5:
-            for i in range(1, 10):
-                self.guangdian(920, 1745.2)
-                time.sleep(1)
-        elif flag == 6:
-            for i in range(0, 6):
-                self.guangdian(920, 2000)
-                time.sleep(1)
+    def JRRW(self):
+        self.tap(115, 1171)
+        time.sleep(2)
+        # 进入今日任务页面
+        # 浏览每日活动
+        self.guangdian(956, 998, 11)
+        time.sleep(2)
+        # 浏览聚划算
+        self.guangdian(932, 1213, 11)
+        time.sleep(2)
+        # 搜索商品
+        self.sousuo()
+        time.sleep(1)
+        # 去首页
+        self.tap(932, 1896)
+        for j in (0, 11):
+            print("浏览中：" + str(j))
+            time.sleep(1)
+
+        self.tap(130, 2187)
+        time.sleep(1)
+        mttest.start(557, 956)
+        print("今日任务结束")
+
+    def sousuo(self):
+        self.tap(932, 1675)
+        time.sleep(2)
+        self.tap(819, 1068)
+        time.sleep(2)
+        for j in range(0, 11):
+            print("浏览中：" + str(j))
+            time.sleep(1)
+        # 左滑返回
+        self.swipLeft(500, 0.55)
+        print("左滑返回")
+        time.sleep(2)
+        self.swipLeft(500, 0.55)
+        print("左滑返回")
+        time.sleep(2)
+        self.swipLeft(500, 0.55)
+        print("左滑返回")
+
+    def start(self, x, y):
+        self.tap(x, y)
+        time.sleep(2)
+        self.tap(152, 475)
+        time.sleep(2)
+
+    def Lfeiliao(self):
+        self.tap(975, 1138)
+        time.sleep(1)
+        #每日打卡
+
+        #逛 1
+        self.guangdian(899, 1166, 21)
+        time.sleep(2)
+
+        # 逛 2
+        self.guangdian(899, 1380, 21)
+        time.sleep(2)
+
+        # 逛 3
+        self.guangdian(899, 1600, 21)
+        time.sleep(2)
+        # 逛 4
+        self.guangdian(899, 1800, 21)
+        time.sleep(2)
+        # 逛 5
+        self.guangdian(899, 2020, 21)
+        time.sleep(2)
+        # # 上滑
+        # self.swipeUp(500, 0.55)  # 1080 宽
+        # print("上滑")
+        # time.sleep(2)
+        # # 逛 6
+        # self.guangdian(899, 1860, 21)
+        # time.sleep(2)
+        # # 逛 7
+        # self.guangdian(899, 2080, 21)
+        # time.sleep(2)
+        #关闭
+        self.tap(1019, 566)
+
 
 
 if __name__ == "__main__":
     print("开始测试")
     mttest = MyTests()
     mttest.getSize()
-    # 点击领猫币 到领猫币中心
-    mttest.tap(920, 1640)
-    print("进入领币中心了")
-    time.sleep(1)
-    # 1,全部活动，2逛店活动，3,4,5,6
-    mttest.operateAction(6)
+    mttest.start(557, 956)
+    # 今日任务
+    # mttest.JRRW()
+    # 领肥料
+    mttest.Lfeiliao()
+    #
     mttest.tearDown()
     print("结束")
