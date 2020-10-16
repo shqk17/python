@@ -3,6 +3,7 @@ import pymysql
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -71,7 +72,6 @@ class Ui_MainWindow(object):
         self.plainTextEdit_2.setPlaceholderText(_translate("MainWindow", "可以直接手动输入"))
         self.pushButton_2.setText(_translate("MainWindow", "直接跳转"))
         self.pushButton_3.setText(_translate("MainWindow", "生成跳转sql"))
-
 
 
 class bsUtil():
@@ -154,14 +154,26 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         sql4 = "UPDATE `ums`.`act_ru_execution` SET ACT_ID_='%s' " \
                "WHERE  `PROC_INST_ID_` = '%s'  and BUSINESS_KEY_ is null;" % (activi_usertask, activi_PROC_INST_ID_)
         sql5 = "UPDATE act_ru_identitylink SET GROUP_ID_='%s' WHERE TASK_ID_='%s';" % (activi_name, activi_task_id)
-        list = [sql1, sql2, sql3, sql4, sql5]
-        for sql in list:
+        sql_list = [sql1, sql2, sql3, sql4, sql5]
+        for sql in sql_list:
             self.textBrowser.append(sql)
+        if len(sql_list) < 5:
+            self.textBrowser.append("当前更新sql只有%d条，不满足期望5条，请联系小程序制作者检查" % len(sql_list))
+            self.cursor.close()
+            self.db.close()
+            return
         if num == 1:
             # 执行插入操作
-            for sql in list:
+            for sql in sql_list:
                 self.cursor.execute(sql)
                 self.db.commit()
+            # 清空所有的输入框
+            self.textEdit.clear()
+            self.textEdit_2.clear()
+            self.plainTextEdit.clear()
+            self.plainTextEdit_2.clear()
+
+        sql_list.clear()
         self.cursor.close()
         self.db.close()
 
